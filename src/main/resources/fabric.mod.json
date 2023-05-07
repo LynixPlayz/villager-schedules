@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "id": "villagerschedules",
+  "version": "${version}",
+  "name": "VillagerSchedules",
+  "description": "A mod that shows the current villager activity.",
+  "authors": [
+    "LynixIsHere"
+  ],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/VillagerSchedules/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "me.lynix.villagerschedules.VillagerSchedules"
+    ]
+  },
+  "mixins": [
+    "VillagerSchedules.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.14.19",
+    "fabric": "*",
+    "minecraft": "1.19.4"
+  }
+}
