@@ -31,9 +31,9 @@ public class VSHud {
 
         player = client.player;
         this.matrices = matrices;
-
-        drawLabels();
-
+        if(MidnightLib.enabled) {
+            drawLabels();
+        }
         client.getProfiler().pop();
     }
 
