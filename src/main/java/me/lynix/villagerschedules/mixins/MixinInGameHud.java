@@ -4,7 +4,7 @@ import me.lynix.villagerschedules.hud.VSHud;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.DrawableHelper;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.client.util.math.MatrixStack;
@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Environment(EnvType.CLIENT)
 @Mixin(InGameHud.class)
-public class MixinInGameHud extends DrawableHelper {
+public class MixinInGameHud{
 
     @Shadow
     @Final
@@ -34,7 +34,7 @@ public class MixinInGameHud extends DrawableHelper {
     //It is rendered last, so it would appear above anything that the vanilla HUD would render.
     //It only renders when the F3 menu is closed.
     @Inject(method = "render", at = @At("TAIL"))
-    public void renderSimpleHud(MatrixStack matrices, float tickDelta, CallbackInfo ci){
+    public void renderSimpleHud(DrawContext matrices, float tickDelta, CallbackInfo ci){
         if(!this.client.options.debugEnabled) simpleHUD.render(matrices);
     }
 

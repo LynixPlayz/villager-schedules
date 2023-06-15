@@ -6,6 +6,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.util.math.MatrixStack;
 
@@ -15,16 +16,16 @@ import java.util.ArrayList;
 @Environment(EnvType.CLIENT)
 public class VSHud {
     private final MinecraftClient client;
-    private final TextRenderer textRenderer;
     private ClientPlayerEntity player;
-    private MatrixStack matrices;
+    private DrawContext matrices;
+    private TextRenderer textRenderer;
 
     public VSHud(MinecraftClient client) {
         this.client = client;
         textRenderer = client.textRenderer;
     }
 
-    public void render(MatrixStack matrices) {
+    public void render(DrawContext matrices) {
         if(client.options.debugEnabled) return;
 
         client.getProfiler().push("villagerSchedulesHud");
@@ -32,15 +33,15 @@ public class VSHud {
         player = client.player;
         this.matrices = matrices;
         if(MidnightLib.enabled) {
-            drawLabels();
+            drawLabels(matrices);
         }
         client.getProfiler().pop();
     }
 
-    public void drawLabels()
+    public void drawLabels(DrawContext context)
     {
         assert MinecraftClient.getInstance().player != null;
-        int time = (int) (MinecraftClient.getInstance().player.world.getTimeOfDay() % 24000L);
+        int time = (int) (MinecraftClient.getInstance().player.getWorld().getTimeOfDay() % 24000L);
         String labelText = "Sleeping";
         String unemployedLabelText = "Sleeping";
         String childLabelText = "Sleeping";
@@ -110,13 +111,13 @@ public class VSHud {
         int sprintingTop = scaleHeight - maxLineHeight;
         int fullTextHeight = MidnightLib.y;
         //Employed
-        textRenderer.drawWithShadow(matrices, "Employed: ", MidnightLib.x, fullTextHeight, Colors.white);
-        textRenderer.drawWithShadow(matrices, labelText, textRenderer.getWidth("Employed: ") + ((float) textRenderer.getWidth(labelText) / 2) + MidnightLib.x, fullTextHeight, Colors.getVillagerTextColor(labelText));
+        context.drawTextWithShadow(textRenderer, "Employed: ", MidnightLib.x, fullTextHeight, Colors.white);
+        context.drawTextWithShadow(textRenderer, labelText,(int) (textRenderer.getWidth("Employed: ") + ((float) textRenderer.getWidth(labelText) / 2)) + MidnightLib.x, fullTextHeight, Colors.getVillagerTextColor(labelText));
         //Unemployed
-        textRenderer.drawWithShadow(matrices, "Unemployed: ", MidnightLib.x, fullTextHeight + 10, Colors.white);
-        textRenderer.drawWithShadow(matrices, unemployedLabelText, textRenderer.getWidth("Unemployed: ") + ((float) textRenderer.getWidth(unemployedLabelText) / 2) + MidnightLib.x, 10 + fullTextHeight, Colors.getVillagerTextColor(unemployedLabelText));
+        context.drawTextWithShadow(textRenderer, "Unemployed: ", MidnightLib.x, fullTextHeight + 10, Colors.white);
+        context.drawTextWithShadow(textRenderer, unemployedLabelText,(int) (textRenderer.getWidth("Unemployed: ") + ((float) textRenderer.getWidth(unemployedLabelText) / 2)) + MidnightLib.x, 10 + fullTextHeight, Colors.getVillagerTextColor(unemployedLabelText));
         //Child
-        textRenderer.drawWithShadow(matrices, "Child: ", MidnightLib.x, fullTextHeight + 20, Colors.white);
-        textRenderer.drawWithShadow(matrices, childLabelText, textRenderer.getWidth("Child: ") + ((float )textRenderer.getWidth(childLabelText) / 2) + MidnightLib.x, 20 + fullTextHeight, Colors.getVillagerTextColor(childLabelText));
+        context.drawTextWithShadow(textRenderer, "Child: ", MidnightLib.x, fullTextHeight + 20, Colors.white);
+        context.drawTextWithShadow(textRenderer, childLabelText, (int) (textRenderer.getWidth("Child: ") + ((float )textRenderer.getWidth(childLabelText) / 2)) + MidnightLib.x, 20 + fullTextHeight, Colors.getVillagerTextColor(childLabelText));
     }
 }
