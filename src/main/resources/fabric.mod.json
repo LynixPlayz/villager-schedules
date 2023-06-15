@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "villagerschedules",
-  "version": "1.01",
+  "version": "1.02",
   "name": "VillagerSchedules",
   "description": "A mod that shows the current villager activity.",
   "authors": [
