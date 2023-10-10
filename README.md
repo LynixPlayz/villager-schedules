@@ -1,6 +1,6 @@
 # Villager Schedules 
 A fabric mod that adds a Hud which shows what all the villagers are doing.
-Schedules taken from https://minecraft.fandom.com/wiki/Villager#Schedules.
+Schedules taken from https://minecraft.wiki/w/Villager#Schedules.
 
 ![image of what the hud looks like should go here](https://cdn-raw.modrinth.com/data/S5ZH1VsW/images/3193ab74376fe9e8f0026a80973c87cd223bb623.png)
 
