@@ -11,3 +11,5 @@ I know, I'm extremely intelligent.
 
 you should download it from here, that would be very cool of you and i would be very happy. thanks bye   
 https://modrinth.com/mod/villager-schedules
+
+P.S. I work on this project when there is a game update but I do not have any features planned at the moment. But you can suggest some in the issues section and I will probably make it.
