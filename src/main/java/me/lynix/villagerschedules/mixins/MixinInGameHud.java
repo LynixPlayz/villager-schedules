@@ -35,7 +35,7 @@ public class MixinInGameHud{
     //It only renders when the F3 menu is closed.
     @Inject(method = "render", at = @At("TAIL"))
     public void renderSimpleHud(DrawContext matrices, float tickDelta, CallbackInfo ci){
-        if(!this.client.options.debugEnabled) simpleHUD.render(matrices);
+        if(!client.getDebugHud().shouldShowDebugHud()) simpleHUD.render(matrices);
     }
 
 }

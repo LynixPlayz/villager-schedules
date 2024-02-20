@@ -26,7 +26,7 @@ public class VSHud {
     }
 
     public void render(DrawContext matrices) {
-        if(client.options.debugEnabled) return;
+        if(client.getDebugHud().shouldShowDebugHud()) return;
 
         client.getProfiler().push("villagerSchedulesHud");
 
