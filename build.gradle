@@ -38,7 +38,7 @@ publishMods {
     github {
         accessToken = env.GH_TOKEN.value
         repository = "LynixPlayz/villager-schedules"
-        commitish = "main"
+        commitish = "master"
         tagName = "release/${project.version}-${project.minecraft_version}"
     }
 }
